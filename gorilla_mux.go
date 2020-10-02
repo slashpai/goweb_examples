@@ -1,25 +1,24 @@
-
 // Example: In browser type url http://localhost:9082/books/go-programming-blueprint/page/10
 
 package main
 
 import (
-    "fmt"
-    "net/http"
+	"fmt"
+	"net/http"
 
-    "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 )
 
 func main() {
-    r := mux.NewRouter()
+	r := mux.NewRouter()
 
-    r.HandleFunc("/books/{title}/page/{page}", func(w http.ResponseWriter, r *http.Request) {
-        vars := mux.Vars(r)
-        title := vars["title"]
-        page := vars["page"]
+	r.HandleFunc("/books/{title}/page/{page}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		title := vars["title"]
+		page := vars["page"]
 
-        fmt.Fprintf(w, "You've requested the book: %s on page %s\n", title, page)
-    })
+		fmt.Fprintf(w, "You've requested the book: %s on page %s\n", title, page)
+	})
 
-    http.ListenAndServe(":9082", r)
+	http.ListenAndServe(":9082", r)
 }
